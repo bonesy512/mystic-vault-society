@@ -3,6 +3,7 @@ import { Outfit, Cinzel } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const outfit = Outfit({
   variable: "--font-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${cinzel.variable} scroll-smooth`}>
       <body className="bg-background text-foreground min-h-screen flex flex-col font-sans selection:bg-primary/30 selection:text-foreground">
+        <Analytics />
         {/* LocalBusiness Austin, TX Schema */}
         <script
           type="application/ld+json"

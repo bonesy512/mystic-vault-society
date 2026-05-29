@@ -72,6 +72,12 @@ We successfully initialized a Next.js 16 project and completely migrated the leg
   - **Book Cover Brief Builder** ([BriefBuilder.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/components/tools/BriefBuilder.tsx)): A design blueprint workspace form compiling cover elements into a client-side downloadable Markdown brief.
 - **Tools Routing & Navigation**: Deployed page views under `/tools`, `/tools/quiz`, `/tools/timeline`, and `/tools/brief-builder` routes, linking the hub in [Navbar.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/components/layout/Navbar.tsx).
 
+### 12. Vercel Web Analytics
+
+- **Package Installation**: Added `@vercel/analytics` via `npm i @vercel/analytics`. No backend or database dependencies required — Vercel's edge network handles all data aggregation.
+- **Root Layout Injection** ([layout.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/layout.tsx)): Imported `Analytics` from `@vercel/analytics/react` and embedded `<Analytics />` as the first child inside `<body>`, before `<Navbar />` and the `<Suspense>`-wrapped main content. This placement ensures the tracking beacon fires on every page load regardless of route or hydration state.
+- **Architecture Compatibility**: The `<Analytics />` component is a lightweight client-side beacon. It does **not** affect static pre-rendering, component caching (`cacheLife`), or Partial Prerendering (PPR) — preserving the platform's 100/100 Lighthouse performance potential.
+
 ---
 
 ## 🛠️ Verification Results
@@ -85,6 +91,7 @@ npm run build
 ### Build Log Summary:
 - **Zero TypeScript compilation errors.**
 - **Zero build or lint errors.**
+- **`@vercel/analytics` compiles cleanly with no warnings.**
 - **Route Cache Distributions:**
   - `/` (Static) — Cached.
   - `/authors` (Static) — Cached.

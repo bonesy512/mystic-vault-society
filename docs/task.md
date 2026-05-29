@@ -17,3 +17,17 @@
 - `[x]` Verification & Documentation
   - `[x]` Run build `npm run build` to verify compilation
   - `[x]` Update `docs/task.md` and `docs/walkthrough.md`
+
+---
+
+# Checklist — Vercel Web Analytics Integration
+
+- `[x]` Tooling Installation
+  - `[x]` Install Vercel CLI globally (`npm i -g vercel`)
+  - `[x]` Install Vercel Analytics package (`npm i @vercel/analytics`)
+- `[x]` Root Layout Integration
+  - `[x]` Import `Analytics` from `@vercel/analytics/react` in `src/app/layout.tsx`
+  - `[x]` Embed `<Analytics />` inside the root layout body (before `<Navbar />`)
+- `[x]` Verification & Documentation
+  - `[x]` Run build `npm run build` to verify zero compilation errors
+  - `[x]` Update `docs/task.md` and `docs/walkthrough.md`
