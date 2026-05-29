@@ -1,17 +1,19 @@
-# Checklist — Blog Ingestion & Routing Implementation
+# Checklist — SEO Architecture & Interactive Tools
 
-- `[x]` Data Ingestion
-  - `[x]` Scan XML, parse published posts, and save to `src/data/posts.ts`
-- `[x]` Blog Index Hub View
-  - `[x]` Create `src/app/blog/page.tsx` with responsive listing grid and title/date/excerpt details
-  - `[x]` Configure `'use cache'` with `cacheLife('weeks')` revalidation (omitted incompatible `experimental_ppr` segment config)
-- `[x]` Dynamic Blog Post View
-  - `[x]` Create `src/app/blog/[slug]/page.tsx` handling async params Promise unwrapping
-  - `[x]` Render `content:encoded` raw HTML with semantic container styling
-  - `[x]` Wrap dynamic post container in a `<Suspense>` boundary
-  - `[x]` Export dynamic `generateMetadata` function outputting article Open Graph tags
-- `[x]` Navigation Link Updates
-  - `[x]` Update `src/components/layout/Navbar.tsx` to include the Blog link in desktop and mobile layouts
+- `[x]` Local & Global SEO Schemas
+  - `[x]` Embed JSON-LD LocalBusiness/Organization schema in `src/app/layout.tsx`
+  - `[x]` Update layout/footer elements to highlight Austin local consultations (Lakeway, Bee Cave, West Lake Hills)
+  - `[x]` Embed JSON-LD E-E-A-T schemas (ProfilePage/Person) in `src/app/authors/[slug]/page.tsx`
+  - `[x]` Embed JSON-LD E-E-A-T schemas (Article/BlogPosting) in `src/app/blog/[slug]/page.tsx`
+- `[x]` Interactive Components
+  - `[x]` Create `src/components/tools/Quiz.tsx` (Publishing Readiness Quiz)
+  - `[x]` Create `src/components/tools/Timeline.tsx` (Rise of the Veilbreaker Lore Timeline)
+  - `[x]` Create `src/components/tools/BriefBuilder.tsx` (Book Cover Brief Builder)
+- `[x]` Routing & Page Integration
+  - `[x]` Create `/tools/quiz` page view
+  - `[x]` Create `/tools/timeline` page view
+  - `[x]` Create `/tools/brief-builder` page view
+  - `[x]` Link tools inside `Navbar.tsx`, `/services`, or `/shop`
 - `[x]` Verification & Documentation
-  - `[x]` Execute `npm run build` to verify compilation health
-  - `[x]` Update `docs/task.md` and `docs/walkthrough.md` with migration achievements
+  - `[x]` Run build `npm run build` to verify compilation
+  - `[x]` Update `docs/task.md` and `docs/walkthrough.md`

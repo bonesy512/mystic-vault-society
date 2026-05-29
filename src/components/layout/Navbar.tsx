@@ -41,6 +41,7 @@ export default function Navbar() {
     { name: "Services", href: "/services" },
     { name: "Shop", href: "/shop" },
     { name: "Blog", href: "/blog" },
+    { name: "Tools", href: "/tools" },
     { name: "Contact", href: "/contact" },
   ];
 

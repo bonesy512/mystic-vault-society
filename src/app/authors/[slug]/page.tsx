@@ -78,6 +78,26 @@ export default async function AuthorPage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col gap-20 pb-20">
+      {/* ProfilePage and Person E-E-A-T Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "mainEntity": {
+              "@type": "Person",
+              "name": author.name,
+              "jobTitle": author.title,
+              "description": author.bio,
+              "image": author.avatar,
+              "email": author.email,
+              "publishingPrinciples": "https://mysticvaultsociety.com/services",
+              "sameAs": author.books.map(b => b.buyUrl).filter(Boolean)
+            }
+          })
+        }}
+      />
       {/* 1. Bio Section */}
       <section className="bg-gradient-to-b from-[#161618] to-transparent py-16 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">

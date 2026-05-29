@@ -55,6 +55,42 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${cinzel.variable} scroll-smooth`}>
       <body className="bg-background text-foreground min-h-screen flex flex-col font-sans selection:bg-primary/30 selection:text-foreground">
+        {/* LocalBusiness Austin, TX Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Mystic Vault Society",
+              "url": "https://mysticvaultsociety.com",
+              "logo": "https://mysticvaultsociety.com/wp-content/uploads/2025/06/Text-White@3x-scaled.png",
+              "description": "Bespoke publishing press, editorial, and platform design service guild for independent science fiction and fantasy authors.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Austin",
+                "addressRegion": "TX",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.2672,
+                "longitude": -97.7431
+              },
+              "areaServed": [
+                { "@type": "AdministrativeArea", "name": "Austin" },
+                { "@type": "AdministrativeArea", "name": "Lakeway" },
+                { "@type": "AdministrativeArea", "name": "Bee Cave" },
+                { "@type": "AdministrativeArea", "name": "West Lake Hills" }
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "publisher@mysticvaultsociety.com"
+              }
+            })
+          }}
+        />
         <Navbar />
         <main className="flex-grow">
           <Suspense fallback={<div className="min-h-screen bg-background" />}>
@@ -73,7 +109,7 @@ export default function RootLayout({
                 <span className="text-base font-serif font-semibold tracking-wider text-foreground">Mystic Vault Society</span>
               </div>
               <p className="text-muted-foreground text-sm max-w-sm">
-                A service-based publishing guild dedicated to empowering science fiction and fantasy authors. We provide the map, tools, and support to get your story in print.
+                A service-based publishing guild dedicated to empowering SFF authors. Headquartered in Austin, Texas, we offer local in-person consultations, workshops, and design reviews across Lakeway, Bee Cave, and West Lake Hills, alongside our global publishing support.
               </p>
             </div>
             

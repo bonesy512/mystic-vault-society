@@ -90,6 +90,30 @@ async function BlogPostContent({ params }: PostProps) {
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col gap-8">
+      {/* BlogPosting JSON-LD E-E-A-T Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "datePublished": post.date,
+            "author": {
+              "@type": "Person",
+              "name": author,
+              "url": `https://mysticvaultsociety.com${authorLink}`
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Mystic Vault Society",
+              "logo": "https://mysticvaultsociety.com/wp-content/uploads/2025/06/Text-White@3x-scaled.png"
+            },
+            "mainEntityOfPage": `https://mysticvaultsociety.com/blog/${post.slug}`
+          })
+        }}
+      />
       {/* Back button */}
       <div>
         <Link
