@@ -8,6 +8,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Request a Consultation | Mystic Vault Society",
   description: "Get in touch with the Mystic Vault Society. Request a free consultation for developmental editing, print formatting, or cover brief design support.",
+  openGraph: {
+    title: "Request a Consultation | Mystic Vault Society",
+    description: "Get in touch with the Mystic Vault Society. Request a free consultation for developmental editing, print formatting, or cover brief design support.",
+    url: "https://mysticvaultsociety.com/contact",
+    type: "website",
+  },
 };
 
 async function getContactPageData() {

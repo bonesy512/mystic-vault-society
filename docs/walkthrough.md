@@ -31,7 +31,7 @@ We successfully initialized a Next.js 16 project and completely migrated the leg
 ### 4. Decoupled E-Commerce & Webhooks
 - **Checkout Action** ([actions/stripe.ts](file:///actions/stripe.ts)): Server Action initiating Checkout Sessions. Includes automatic mock redirections when Stripe keys are unconfigured.
 - **BuyButton** ([shop/BuyButton.tsx](file:///shop/BuyButton.tsx)): Client button component using React `useTransition` to display active loading states during Stripe redirects.
-- **API Webhook Handler** ([api/webhooks/stripe/route.ts](file:///api/webhooks/stripe/route.ts)): Verifies Stripe signatures. Triggers customer invoice emails via Resend and sends automated order JSON payloads to Printify's API, with fail-safe admin alert emails if Printify fails.
+- **API Webhook Handler** ([api/webhooks/stripe/route.ts](file:///api/webhooks/stripe/route.ts)): Verifies Stripe signatures. Triggers POD fulfillment logs via Printify REST API and dispatch alerts via Resend.
 
 ### 5. SEO & Caching Optimizations
 - Implemented Next.js 16 Page Metadata and dynamic metadata generation for author pages.
@@ -39,19 +39,23 @@ We successfully initialized a Next.js 16 project and completely migrated the leg
 - Enabled cache components natively by configuring `cacheComponents: true` in [next.config.ts](file:///next.config.ts) and adding granular `'use cache'` directives on data-fetching functions.
 
 ### 6. Strict Type Safety & Input Validation Refinements
-- **Eliminated `any` Casting**: Refactored the Stripe Server Action ([actions/stripe.ts](file:///actions/stripe.ts)) and Stripe Webhook route handler ([api/webhooks/stripe/route.ts](file:///api/webhooks/stripe/route.ts)). Removed all occurrences of `as any` and replacement of dynamic payloads with strict validation models.
-- **Zod Webhook Payloads**: Created validation schemas for customer details, shipping address, amount details, and metadata structure inside the Stripe Webhook route handler to guard against prototype pollution or malicious payload construction.
-- **Dynamic Layout Error Boundary**: Created a customizable, client-side error boundary in [error.tsx](file:///error.tsx) matching the MVS dark fantasy palette. Raw exceptions and stack traces are masked, securely displaying only error digests which can be referenced in server logs.
+- **Eliminated `any` Casting**: Refactored the Stripe Server Action and Webhook handlers to use strict validation.
+- **Zod Webhook Payloads**: Created validation schemas for customer details, shipping address, amount details, and metadata structure inside the Stripe Webhook route handler.
+- **Dynamic Layout Error Boundary**: Created a customizable, client-side error boundary in [error.tsx](file:///error.tsx) matching the MVS dark fantasy palette.
 
 ### 7. File-System Routing Refactor & Authors Catalog Page
 - **Directory Rename**: Programmatically renamed the URL-encoded dynamic routing folder `src/app/authors/%5Bslug%5D` to the literal `src/app/authors/[slug]` structure required by Next.js.
-- **Route Loading & Error Skeletons**: Added `src/app/authors/[slug]/loading.tsx` to serve responsive skeleton loaders during hydration, and `src/app/authors/[slug]/error.tsx` to handle sub-route validation errors.
-- **Authors Index Catalog**: Created the master guild authors page at `src/app/authors/page.tsx` displaying interactive, responsive grid cards for the authors mapped from the XML.
-- **Dynamic Segment Unwrapping**: Implemented dynamic segment props typing under Next.js 16 async params contract (`params: Promise<{ slug: string }>`).
+- **Route Loading & Error Skeletons**: Added loading skeletons and error boundaries to dynamic author views.
+- **Authors Index Catalog**: Created the master guild authors page at `src/app/authors/page.tsx` displaying interactive, responsive grid cards for the authors.
 
 ### 8. Interactive Navigation Dropdown & Profile Vault Styling
-- **Navbar Dropdown Menu**: Refactored [Navbar.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/components/layout/Navbar.tsx) to replace the static Authors text link with an interactive dropdown menu on desktop. Featuring Michael Schustereit prominently as a primary entry alongside Thomas Schustereit, and adding nested, indented navigation sublinks on mobile devices.
-- **Refined Directory Cards**: Updated [page.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/authors/page.tsx) to label literary/design focuses explicitly and style card actions with "Enter Vault" hover buttons.
+- **Navbar Dropdown Menu**: Refactored [Navbar.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/components/layout/Navbar.tsx) to replace the static Authors text link with an interactive dropdown menu on desktop.
+- **Refined Directory Cards**: Updated [page.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/authors/page.tsx) to label focuses explicitly and style card actions with "Enter Vault" hover buttons.
+
+### 9. Complete Open Graph Protocol Compliance
+- **Root Layout OG Assets**: Added fallback 1200x630 Open Graph sharing images inside the global metadata block in [layout.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/layout.tsx).
+- **Static Page Meta Updates**: Appended explicit Open Graph properties (title, description, URL, and type) to services, shop, contact, and authors pages, pointing each to its correct canonical URL mapping.
+- **Dynamic Author Profile Profiles**: Refactored the dynamic metadata generator in [authors/[slug]/page.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/authors/[slug]/page.tsx) to output Open Graph `type: "profile"`, profile-specific canonical sharing URL, and map the author's avatar URL as the image object with custom widths and alt descriptions for maximum social card compatibility.
 
 ---
 
@@ -75,6 +79,4 @@ npm run build
   - `/shop/success` (**Partial Prerender**) — Hydrated statically as a shell while streaming search parameters dynamically at request time inside `<Suspense>`.
   - `/contact` (Static) — Cached.
   - `/api/webhooks/stripe` (**Dynamic**) — Evaluated on demand.
-
-> [!NOTE]
-> All e-commerce actions and email submissions have resilient fallbacks that allow testing and verifying local user flows without requiring active Stripe, Printify, or Resend environment API keys.
+  - `/sitemap.xml` (**Dynamic**) — Evaluated on demand.

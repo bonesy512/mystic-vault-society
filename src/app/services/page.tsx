@@ -8,6 +8,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Guild Services | Mystic Vault Society",
   description: "Bespoke publishing, editorial, and platform design services for science fiction and fantasy authors. Developmental editing, cover brief design, formatting, and distribution project management.",
+  openGraph: {
+    title: "Guild Services | Mystic Vault Society",
+    description: "Bespoke publishing, editorial, and platform design services for science fiction and fantasy authors. Developmental editing, cover brief design, formatting, and distribution project management.",
+    url: "https://mysticvaultsociety.com/services",
+    type: "website",
+  },
 };
 
 async function getServicesData() {

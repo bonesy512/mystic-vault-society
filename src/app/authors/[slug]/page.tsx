@@ -24,9 +24,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const author = getAuthor(slug);
   if (!author) return {};
   
+  const title = `${author.name} | ${author.title}`;
+  const description = `${author.bio.slice(0, 155)}... Browse published books by ${author.name} including Rise of the Veilbreaker.`;
+  
   return {
-    title: `${author.name} | ${author.title}`,
-    description: `${author.bio.slice(0, 155)}... Browse published books by ${author.name} including Rise of the Veilbreaker.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://mysticvaultsociety.com/authors/${author.slug}`,
+      type: "profile",
+      images: [
+        {
+          url: author.avatar,
+          width: 800,
+          height: 800,
+          alt: `${author.name} Profile Photo`,
+        }
+      ],
+    },
   };
 }
 

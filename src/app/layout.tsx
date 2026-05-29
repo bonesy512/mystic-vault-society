@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     siteName: "Mystic Vault Society",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/wp-content/uploads/2025/07/IMG_7628-scaled.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mystic Vault Society Publishing Guild",
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",

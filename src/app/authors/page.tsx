@@ -9,6 +9,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Guild Authors | Mystic Vault Society",
   description: "Meet the elite science fiction and fantasy authors of the Mystic Vault Society. Explore published bibliographies, detailed worldbuilding projects, and exclusive merchandise.",
+  openGraph: {
+    title: "Guild Authors | Mystic Vault Society",
+    description: "Meet the elite science fiction and fantasy authors of the Mystic Vault Society. Explore published bibliographies, detailed worldbuilding projects, and exclusive merchandise.",
+    url: "https://mysticvaultsociety.com/authors",
+    type: "website",
+  },
 };
 
 async function getAuthorsDirectoryData() {

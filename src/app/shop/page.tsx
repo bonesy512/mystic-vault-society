@@ -9,6 +9,12 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Official Guild Shop | Mystic Vault Society",
   description: "Browse official Mystic Vault Society apparel, steel bookmarks, fleece hoodies, classic dad caps, and custom SFF wall art posters.",
+  openGraph: {
+    title: "Official Guild Shop | Mystic Vault Society",
+    description: "Browse official Mystic Vault Society apparel, steel bookmarks, fleece hoodies, classic dad caps, and custom SFF wall art posters.",
+    url: "https://mysticvaultsociety.com/shop",
+    type: "website",
+  },
 };
 
 async function getShopData() {
