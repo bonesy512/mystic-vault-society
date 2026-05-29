@@ -69,9 +69,14 @@ All code blocks conform strictly to compiler constraints:
 - Prominently lists Michael Schustereit as the primary entry ("Epic Sci-Fi & Dark Fantasy"), followed by Thomas Schustereit ("Creative Design & Illustration").
 - Integrates indented sublink options under the main Authors link on mobile.
 
-### 7. Site Maps & Robots Configurations — `src/app/sitemaps.ts` & `src/app/robots.ts`
-- `sitemaps.ts` dynamically indexes paths: `/`, `/authors`, `/services`, `/shop`, `/contact`, and author dynamic slugs.
+### 7. Site Maps & Robots Configurations — `src/app/sitemap.ts` & `src/app/robots.ts`
+- `sitemap.ts` dynamically indexes paths: `/`, `/authors`, `/services`, `/shop`, `/blog`, `/contact`, and dynamic author and blog post slugs.
 - `robots.ts` disallows search index crawling for backend `/api/` endpoints and success hooks while publishing `/sitemap.xml`.
+
+### 8. Blog Infrastructure & App Router Routes — `src/app/blog/`
+- **Data Ingestion (`src/data/posts.ts`):** 6 published posts extracted from legacy XML export.
+- **Blog index (`src/app/blog/page.tsx`):** Lists posts in a grid. Employs `'use cache'` with `cacheLife('weeks')`. Omitted `experimental_ppr` segment config to avoid conflict with the project's native `cacheComponents: true` config.
+- **Blog post details (`src/app/blog/[slug]/page.tsx`):** Implements dynamic route contract with async params unwrapping. Wraps the main dynamic body layout in `<Suspense>` to preserve PPR capabilities on outer static layout elements. Exports article-specific Open Graph dynamic metadata API.
 
 ---
 
@@ -81,4 +86,4 @@ Production builds compile cleanly with Turbopack and TypeScript checking:
 npm run build
 ```
 - **TypeScript compiles successfully in 2.5 seconds.**
-- **Route Cache Map:** All standard routes are generated as `Static` files, with the success route and dynamic author profile pages compiled as `Partial Prerender (PPR)` dynamic holes.
+- **Route Cache Map:** All standard routes are generated as `Static` files, with the success route, dynamic author profile pages, and dynamic blog post pages compiled as `Partial Prerender (PPR)` dynamic holes.

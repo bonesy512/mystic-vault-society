@@ -110,5 +110,18 @@ This document captures the structured multi-agent design review process for the 
 - **Resilient Address Parsing:** Defined nested schemas for Stripe addresses (`city`, `state`, `line1`, `line2`, `postal_code`, `country`) so that custom Printify order fulfillment mapping runs under fully-typed properties, removing type evasions.
 
 ### 3. Masked Exception Error Boundaries
-- **Information Disclosure Prevention:** Deployed a client-side layout error boundary `src/app/error.tsx`. It intercepts client/server anomalies and prevents detailed stack trace details or server exceptions from leaking on-screen.
 - **Cryptographic Log Referencing:** Exposes only the Next.js standard secure `error.digest` to end-users, enabling administrators to search server-side logs securely for debugging without publishing the stack trace to the public interface.
+
+---
+
+## Phase 5: Blog Ingestion & Compiler Compatibility
+
+### 1. Ingestion Strategy
+- Parsed the legacy WordPress XML (`mysticvaultsociety.WordPress.2026-05-29.xml`) to extract `post` type nodes.
+- Ingested 6 published posts cleanly into a static data file `src/data/posts.ts` containing safe string escapes.
+
+### 2. Caching & PPR Coexistence
+- **Objection:** During compilation, Next.js 16 rejected `export const experimental_ppr = true` inside `src/app/blog/page.tsx`, reporting a conflict with `nextConfig.cacheComponents: true`.
+- **Resolution:** Omitted route-level `experimental_ppr = true` from the static directory view (`src/app/blog/page.tsx`) to prioritize component caching optimizations. Under Next.js 16, component caching provides equivalent performance gains for static hubs while remaining fully compatible with the compiler rules.
+- **Dynamic Segment PPR:** Suspensed the dynamic post details inside `src/app/blog/[slug]/page.tsx` within `<Suspense>` to preserve the global shell's static prerendering structure.
+

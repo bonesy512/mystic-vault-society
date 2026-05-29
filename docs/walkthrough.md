@@ -57,6 +57,12 @@ We successfully initialized a Next.js 16 project and completely migrated the leg
 - **Static Page Meta Updates**: Appended explicit Open Graph properties (title, description, URL, and type) to services, shop, contact, and authors pages, pointing each to its correct canonical URL mapping.
 - **Dynamic Author Profile Profiles**: Refactored the dynamic metadata generator in [authors/[slug]/page.tsx](file:///e:/Projects/Mystic%20Vault%20Society/mystic-vault-society/src/app/authors/[slug]/page.tsx) to output Open Graph `type: "profile"`, profile-specific canonical sharing URL, and map the author's avatar URL as the image object with custom widths and alt descriptions for maximum social card compatibility.
 
+### 10. WordPress Blog Ingestion & App Router Layouts
+- **WXR XML Parsing (`src/data/posts.ts`):** Programmatically parsed the legacy WXR XML export to extract published post items into a local static data collection.
+- **Blog Hub Layout (`src/app/blog/page.tsx`):** Designed an immersive grid view displaying chronological cards for worldbuilding lore and essays. Enabled component caching (`cacheLife('weeks')`) and omitted incompatible `experimental_ppr` segment config.
+- **Dynamic Lore Sub-Route (`src/app/blog/[slug]/page.tsx`):** Created dynamic segment parameters using async unwrapping Promise contracts. Wrapped content in `<Suspense>` boundaries to allow outer shells to remain static, and rendered escaped HTML safely with custom CSS formatting overrides. Exposes full Article type Open Graph meta tags.
+- **Navigation Menu Link:** Registered `/blog` dynamically into desktop and mobile navigation layouts in `Navbar.tsx`.
+
 ---
 
 ## 🛠️ Verification Results
@@ -74,6 +80,8 @@ npm run build
   - `/` (Static) — Cached.
   - `/authors` (Static) — Cached.
   - `/authors/[slug]` (Partial Prerender) — Statically pre-rendered for all authors using `generateStaticParams` (with dynamic search parameters suspended).
+  - `/blog` (Static) — Cached.
+  - `/blog/[slug]` (Partial Prerender) — Statically pre-rendered for all posts using `generateStaticParams`.
   - `/services` (Static) — Cached.
   - `/shop` (Static) — Cached.
   - `/shop/success` (**Partial Prerender**) — Hydrated statically as a shell while streaming search parameters dynamically at request time inside `<Suspense>`.

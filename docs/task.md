@@ -1,14 +1,17 @@
-# Checklist — Complete Open Graph Protocol Compliance
+# Checklist — Blog Ingestion & Routing Implementation
 
-- `[x]` Global Layout Meta Updates
-  - `[x]` Update `src/app/layout.tsx` to add default `openGraph.images` metadata
-- `[x]` Static Page Meta Updates
-  - `[x]` Update `src/app/services/page.tsx` metadata with custom `openGraph` details
-  - `[x]` Update `src/app/shop/page.tsx` metadata with custom `openGraph` details
-  - `[x]` Update `src/app/contact/page.tsx` metadata with custom `openGraph` details
-  - `[x]` Update `src/app/authors/page.tsx` metadata with custom `openGraph` details
-- `[x]` Dynamic Segment Meta Updates
-  - `[x]` Update `src/app/authors/[slug]/page.tsx` dynamic metadata with `profile` type and avatar image
+- `[x]` Data Ingestion
+  - `[x]` Scan XML, parse published posts, and save to `src/data/posts.ts`
+- `[x]` Blog Index Hub View
+  - `[x]` Create `src/app/blog/page.tsx` with responsive listing grid and title/date/excerpt details
+  - `[x]` Configure `'use cache'` with `cacheLife('weeks')` revalidation (omitted incompatible `experimental_ppr` segment config)
+- `[x]` Dynamic Blog Post View
+  - `[x]` Create `src/app/blog/[slug]/page.tsx` handling async params Promise unwrapping
+  - `[x]` Render `content:encoded` raw HTML with semantic container styling
+  - `[x]` Wrap dynamic post container in a `<Suspense>` boundary
+  - `[x]` Export dynamic `generateMetadata` function outputting article Open Graph tags
+- `[x]` Navigation Link Updates
+  - `[x]` Update `src/components/layout/Navbar.tsx` to include the Blog link in desktop and mobile layouts
 - `[x]` Verification & Documentation
-  - `[x]` Run build `npm run build` to verify compilation
-  - `[x]` Synchronize task and walkthrough files in the workspace `docs/` directory
+  - `[x]` Execute `npm run build` to verify compilation health
+  - `[x]` Update `docs/task.md` and `docs/walkthrough.md` with migration achievements
